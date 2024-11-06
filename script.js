@@ -55,16 +55,25 @@ document.addEventListener("DOMContentLoaded", function() {
     let score = 0;
     let timer;
     const timeLimit = 30;
+    let playerName = "";  // Variable to store player's name
 
-    // Fungsi untuk memulai kuis
+    // Function to start the quiz
     function startQuiz() {
+        // Get player's name from input and save it
+        playerName = document.getElementById("name").value;
+
+        if (!playerName) {
+            alert("Please enter your name to start the quiz.");
+            return;
+        }
+
         showSection("quiz");
         currentQuestionIndex = 0;
         score = 0;
         loadQuestion();
     }
 
-    // Fungsi untuk menampilkan bagian yang dipilih
+    // Function to show a specific section
     function showSection(sectionId) {
         document.querySelectorAll("section").forEach(section => {
             section.style.display = "none";
@@ -72,27 +81,27 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(sectionId).style.display = "block";
     }
 
-    // Fungsi untuk memuat pertanyaan
+    // Function to load a question
     function loadQuestion() {
         const question = questions[currentQuestionIndex];
         document.getElementById("question-text").innerText = question.question;
 
-        // Generate pilihan jawaban
+        // Generate answer options
         let optionsHtml = "";
         question.options.forEach(option => {
             optionsHtml += `<label><input type="radio" name="answer" value="${option}"> ${option}</label><br>`;
         });
         document.getElementById("answer-options").innerHTML = optionsHtml;
 
-        // Update status pertanyaan
+        // Update question status
         document.getElementById("current-question").innerText = currentQuestionIndex + 1;
         document.getElementById("total-questions").innerText = questions.length;
 
-        // Mulai timer
+        // Start the timer
         startTimer();
     }
 
-    // Fungsi untuk memulai timer
+    // Function to start the timer
     function startTimer() {
         let timeLeft = timeLimit;
         document.getElementById("time-left").innerText = timeLeft;
@@ -107,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 1000);
     }
 
-    // Fungsi untuk memeriksa jawaban pengguna
+    // Function to check user's answer
     function checkAnswer() {
         const question = questions[currentQuestionIndex];
         const userAnswer = document.querySelector('input[name="answer"]:checked');
@@ -116,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Fungsi untuk menampilkan pertanyaan berikutnya
+    // Function to show the next question
     function nextQuestion() {
         clearInterval(timer);
         checkAnswer();
@@ -129,14 +138,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Fungsi untuk menampilkan hasil
+    // Function to show the result
     function showResult() {
-        document.getElementById("player-name").innerText = "Pengguna";
+        document.getElementById("player-name").innerText = playerName;  // Display player's name
         document.getElementById("player-score").innerText = score;
         showSection("result");
     }
 
-    // Fungsi untuk mengatur ulang kuis
+    // Function to reset the quiz
     function resetQuiz() {
         score = 0;
         currentQuestionIndex = 0;
@@ -148,6 +157,6 @@ document.addEventListener("DOMContentLoaded", function() {
     window.nextQuestion = nextQuestion;
     window.resetQuiz = resetQuiz;
 
-    // Atur tampilan awal
+    // Set the initial view
     showSection("home");
 });
