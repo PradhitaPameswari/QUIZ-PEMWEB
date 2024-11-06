@@ -55,11 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let score = 0;
     let timer;
     const timeLimit = 30;
-    let playerName = "";  // Variable to store player's name
+    let playerName = "";  
 
-    // Function to start the quiz
-    function startQuiz() {
-        // Get player's name from input and save it
+   function startQuiz() {
         playerName = document.getElementById("name").value;
 
         if (!playerName) {
@@ -73,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
         loadQuestion();
     }
 
-    // Function to show a specific section
     function showSection(sectionId) {
         document.querySelectorAll("section").forEach(section => {
             section.style.display = "none";
@@ -81,27 +78,21 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(sectionId).style.display = "block";
     }
 
-    // Function to load a question
     function loadQuestion() {
         const question = questions[currentQuestionIndex];
         document.getElementById("question-text").innerText = question.question;
-
-        // Generate answer options
         let optionsHtml = "";
         question.options.forEach(option => {
             optionsHtml += `<label><input type="radio" name="answer" value="${option}"> ${option}</label><br>`;
         });
         document.getElementById("answer-options").innerHTML = optionsHtml;
 
-        // Update question status
         document.getElementById("current-question").innerText = currentQuestionIndex + 1;
         document.getElementById("total-questions").innerText = questions.length;
 
-        // Start the timer
         startTimer();
     }
 
-    // Function to start the timer
     function startTimer() {
         let timeLeft = timeLimit;
         document.getElementById("time-left").innerText = timeLeft;
@@ -116,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 1000);
     }
 
-    // Function to check user's answer
     function checkAnswer() {
         const question = questions[currentQuestionIndex];
         const userAnswer = document.querySelector('input[name="answer"]:checked');
@@ -125,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Function to show the next question
     function nextQuestion() {
         clearInterval(timer);
         checkAnswer();
@@ -138,25 +127,21 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Function to show the result
     function showResult() {
-        document.getElementById("player-name").innerText = playerName;  // Display player's name
+        document.getElementById("player-name").innerText = playerName; 
         document.getElementById("player-score").innerText = score;
         showSection("result");
     }
 
-    // Function to reset the quiz
     function resetQuiz() {
         score = 0;
         currentQuestionIndex = 0;
         showSection("home");
     }
 
-    // Event Listeners
     window.startQuiz = startQuiz;
     window.nextQuestion = nextQuestion;
     window.resetQuiz = resetQuiz;
 
-    // Set the initial view
     showSection("home");
 });
