@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
 </head>
 <body>
-    
+    <!-- Halaman Home -->
+    <div id="home-page">
+        <h1>Selamat Datang di Quiz</h1>
+        <p>Petunjuk: Kamu memiliki waktu 30 detik untuk menjawab setiap pertanyaan.</p>
+        <button onclick="showPage('data-page')">Mulai Quiz</button>
+    </div>
+
+    <!-- Halaman Data Pemain -->
+    <div id="data-page" style="display: none;">
+        <h2>Masukkan Data Pemain</h2>
+        <form id="playerForm" onsubmit="event.preventDefault(); startQuiz();">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" required>
+            <label for="nim">NIM:</label>
+            <input type="text" id="nim" required>
+            <button type="submit">Mulai Quiz</button>
+        </form>
+    </div>
+
+    <!-- Halaman Quiz -->
+    <div id="quiz-page" style="display: none;">
+        <h2>Quiz</h2>
+        <p id="question-text">Question here...</p>
+        <div id="answer-options"></div>
+        <button id="next-button" onclick="nextQuestion()">Next</button>
+        <p id="status">Status: <span id="completed-count"></span> dari <span id="total-questions"></span></p>
+        <p id="timer">Waktu: <span id="time-left">30</span> detik</p>
+    </div>
+
+    <!-- Halaman Hasil -->
+    <div id="result-page" style="display: none;">
+        <h2>Hasil Quiz</h2>
+        <p>Nama: <span id="player-name"></span></p>
+        <p>NIM: <span id="player-nim"></span></p>
+        <p>Total Skor: <span id="total-score"></span></p>
+        <button onclick="resetQuiz()">Kembali ke Home</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
