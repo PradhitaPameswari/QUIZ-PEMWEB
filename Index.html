@@ -1,50 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="id">
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Quiz Iklim dan Alam</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-    <!-- Halaman Home -->
-    <div id="home-page">
-        <h1>Selamat Datang di Quiz</h1>
-        <p>Petunjuk: Kamu memiliki waktu 30 detik untuk menjawab setiap pertanyaan.</p>
-        <button onclick="showPage('data-page')">Mulai Quiz</button>
+    <!-- Header -->
+    <header class="header">
+        <h1>🌍 Quiz Iklim dan Alam 🌱</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+            <li><a href="#result">Result</a></li>
+        </ul>
+    </nav>  
+
+    <!-- Main Content Layout -->
+    <div class="main-container">
+        <!-- Main Content Section -->
+        <div class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="home-section">
+                <h1>Selamat Datang di Quiz Iklim dan Alam!🌱</h1>
+                <p>Uji pengetahuanmu tentang iklim, cuaca, dan fenomena alam di sini.</p>
+
+                <p>Silakan masukkan Nama dan NIM Anda untuk memulai kuis.</p>
+                <form id="login-form">
+                    <label for="name"><b>Nama:</b></label>
+                    <input type="text" id="name" class="input-box" required>
+                    <label for="nim"><b>NIM:</b></label>
+                    <input type="text" id="nim" class="input-box" required>
+                    <button onclick="startQuiz()">Mulai Quiz</button>
+                </form>
+
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz" class="quiz-section">
+                <h2>Quiz Wawasan Alam 🌱</h2>
+                <div id="question-container">
+                    <p id="question-text">Pertanyaan akan muncul di sini...</p>
+                    <div id="answer-options"></div>
+                </div>
+                <button id="next-button" onclick="nextQuestion()">Lanjut</button>
+                <p id="timer">Waktu Tersisa: <span id="time-left">30</span> detik</p>
+                <p id="status">Pertanyaan <span id="current-question"></span> dari <span id="total-questions"></span></p>
+            </section>
+
+            <!-- Result Section -->
+            <section id="result" class="result-section">
+                <h2>Hasil Quiz 🌍</h2>
+                <p><b>Nama:</b> <span id="player-name"></span></p>
+                <p><b>Skor:</b> <span id="player-score"></span></p>
+                <button onclick="resetQuiz()">Coba Lagi</button>
+            </section>
+        </div>
     </div>
 
-    <!-- Halaman Data Pemain -->
-    <div id="data-page" style="display: none;">
-        <h2>Masukkan Data Pemain</h2>
-        <form id="playerForm" onsubmit="event.preventDefault(); startQuiz();">
-            <label for="name">Nama:</label>
-            <input type="text" id="name" required>
-            <label for="nim">NIM:</label>
-            <input type="text" id="nim" required>
-            <button type="submit">Mulai Quiz</button>
-        </form>
-    </div>
-
-    <!-- Halaman Quiz -->
-    <div id="quiz-page" style="display: none;">
-        <h2>Quiz</h2>
-        <p id="question-text">Question here...</p>
-        <div id="answer-options"></div>
-        <button id="next-button" onclick="nextQuestion()">Next</button>
-        <p id="status">Status: <span id="completed-count"></span> dari <span id="total-questions"></span></p>
-        <p id="timer">Waktu: <span id="time-left">30</span> detik</p>
-    </div>
-
-    <!-- Halaman Hasil -->
-    <div id="result-page" style="display: none;">
-        <h2>Hasil Quiz</h2>
-        <p>Nama: <span id="player-name"></span></p>
-        <p>NIM: <span id="player-nim"></span></p>
-        <p>Total Skor: <span id="total-score"></span></p>
-        <button onclick="resetQuiz()">Kembali ke Home</button>
-    </div>
-
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Quiz Iklim dan Alam. Semua hak dilindungi.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
